@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIPLibrary", "CIPLibrary\CIPLibrary.csproj", "{1548DC8C-330C-4A49-ADC1-D72EB6852B8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsService", "WindowsService", "{E43AFE8A-38DD-40AE-AF2D-3FB50F32BBB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopMilWService", "CoopMilWService\CoopMilWService.csproj", "{697AAA71-D3AB-49AF-BAB5-B9EC02DDE25B}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CoopMilWServiceInstaller", "CoopMilWServiceInstaller\CoopMilWServiceInstaller.vdproj", "{6EBBC5B7-123B-46C0-9AE6-6E9B8854E879}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1548DC8C-330C-4A49-ADC1-D72EB6852B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1548DC8C-330C-4A49-ADC1-D72EB6852B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1548DC8C-330C-4A49-ADC1-D72EB6852B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1548DC8C-330C-4A49-ADC1-D72EB6852B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697AAA71-D3AB-49AF-BAB5-B9EC02DDE25B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697AAA71-D3AB-49AF-BAB5-B9EC02DDE25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697AAA71-D3AB-49AF-BAB5-B9EC02DDE25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697AAA71-D3AB-49AF-BAB5-B9EC02DDE25B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EBBC5B7-123B-46C0-9AE6-6E9B8854E879}.Debug|Any CPU.ActiveCfg = Debug
+		{6EBBC5B7-123B-46C0-9AE6-6E9B8854E879}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{697AAA71-D3AB-49AF-BAB5-B9EC02DDE25B} = {E43AFE8A-38DD-40AE-AF2D-3FB50F32BBB9}
+		{6EBBC5B7-123B-46C0-9AE6-6E9B8854E879} = {E43AFE8A-38DD-40AE-AF2D-3FB50F32BBB9}
+	EndGlobalSection
+EndGlobal
