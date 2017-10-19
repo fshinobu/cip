@@ -43,6 +43,7 @@
     <Reference Include="System.ServiceModel.Discovery" />
     <Reference Include="System.ServiceModel.Routing" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,15 +53,64 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\LogHelper.cs" />
-    <Compile Include="Classes\SCC013\ASCC013Integrator.cs" />
+    <Compile Include="Classes\SCC\ASCIntegrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SCC006Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SCC007Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SCC011Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SCC012Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SCC013Reference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SCC005Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SCC016Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SCC022Reference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="WCF\Classes\ASCC016Service.cs" />
+    <Compile Include="WCF\Classes\ASCC022Service.cs" />
+    <Compile Include="WCF\Classes\ASCC006Service.cs" />
+    <Compile Include="WCF\Classes\ASCC007Service.cs" />
+    <Compile Include="WCF\Classes\ASCC011Service.cs" />
+    <Compile Include="WCF\Classes\ASCC012Service.cs" />
     <Compile Include="WCF\Classes\ASCC013Service.cs" />
+    <Compile Include="WCF\Classes\ASCC005Service.cs" />
+    <Compile Include="WCF\Interface\IASCC005Service.cs" />
+    <Compile Include="WCF\Interface\IASCC006Service.cs" />
+    <Compile Include="WCF\Interface\IASCC007Service.cs" />
+    <Compile Include="WCF\Interface\IASCC011Service.cs" />
+    <Compile Include="WCF\Interface\IASCC012Service.cs" />
     <Compile Include="WCF\Interface\IASCC013Service.cs" />
+    <Compile Include="WCF\Interface\IASCC016Service.cs" />
+    <Compile Include="WCF\Interface\IASCC022Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -69,6 +119,40 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SCC005Reference\CIPLibrary.SCC005Reference.WSCC005Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC005Reference\CIPLibrary.SCC005Reference.WSCC005Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC006Reference\CIPLibrary.SCC006Reference.WSCC006Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC006Reference\CIPLibrary.SCC006Reference.WSCC006Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC006Reference\WSCC006.wsdl" />
+    <None Include="Service References\SCC007Reference\CIPLibrary.SCC007Reference.WSCC007Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC007Reference\CIPLibrary.SCC007Reference.WSCC007Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC007Reference\WSCC007.wsdl" />
+    <None Include="Service References\SCC011Reference\CIPLibrary.SCC011Reference.WSCC011Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC011Reference\CIPLibrary.SCC011Reference.WSCC011Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC011Reference\WSCC011.wsdl" />
+    <None Include="Service References\SCC012Reference\CIPLibrary.SCC012Reference.WSCC012Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC012Reference\CIPLibrary.SCC012Reference.WSCC012Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC012Reference\WSCC012.wsdl" />
     <None Include="Service References\SCC013Reference\CIPLibrary.SCC013Reference.WSCC013Response.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -76,9 +160,31 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SCC013Reference\WSCC013.wsdl" />
+    <None Include="Service References\SCC005Reference\WSCC005.wsdl" />
+    <None Include="Service References\SCC016Reference\CIPLibrary.SCC016Reference.WSCC016Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC016Reference\CIPLibrary.SCC016Reference.WSCC016Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC016Reference\WSCC016.wsdl" />
+    <None Include="Service References\SCC022Reference\CIPLibrary.SCC022Reference.WSCC022Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC022Reference\CIPLibrary.SCC022Reference.WSCC022Response1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SCC022Reference\WSCC022.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SCC006Reference\" />
+    <WCFMetadataStorage Include="Service References\SCC007Reference\" />
+    <WCFMetadataStorage Include="Service References\SCC011Reference\" />
+    <WCFMetadataStorage Include="Service References\SCC012Reference\" />
     <WCFMetadataStorage Include="Service References\SCC013Reference\" />
+    <WCFMetadataStorage Include="Service References\SCC005Reference\" />
+    <WCFMetadataStorage Include="Service References\SCC016Reference\" />
+    <WCFMetadataStorage Include="Service References\SCC022Reference\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SCC013Reference\configuration91.svcinfo" />
@@ -92,7 +198,90 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\SCC005Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC005Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC005Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC006Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC006Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC006Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC012Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC012Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC012Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC011Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC011Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC011Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC016Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC016Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC016Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC007Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC007Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC007Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC022Reference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC022Reference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SCC022Reference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.cip-bancos.org.br/ARQ/WSCC007.xsd" targetNamespace="http://www.cip-bancos.org.br/ARQ/WSCC007.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns="http://www.cip-bancos.org.br/ARQ/WSCC007.xsd" xmlns:ASCC007="http://www.cip-bancos.org.br/ARQ/ASCC007.xsd" xmlns:WSTIPOS="http://www.cip-bancos.org.br/ARQ/WSTIPOS.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cip-bancos.org.br/ARQ/WSCC007.xsd" id="WSCC007" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.cip-bancos.org.br/ARQ/WSTIPOS.xsd" />
+      <xs:import namespace="http://www.cip-bancos.org.br/ARQ/ASCC007.xsd" />
+      <xs:element name="WSCC007Request">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="CabecalhoReq" type="WSTIPOS:CabecalhoReqComplexType" />
+            <xs:element name="Corpo" type="tns:WSCC007CorpoComplexType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="WSCC007Response">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="CabecalhoResp" type="WSTIPOS:CabecalhoRespComplexType" />
+            <xs:element minOccurs="0" name="Corpo" type="tns:WSCC007RETCorpoComplexType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="WSCC007CorpoComplexType">
+        <xs:sequence>
+          <xs:element name="ASCC007" type="ASCC007:ASCC007ComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WSCC007RETCorpoComplexType">
+        <xs:choice>
+          <xs:element minOccurs="0" name="ASCC007RET" type="ASCC007:ASCC007RETComplexType" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns="http://www.cip-bancos.org.br/ARQ/WSTIPOS.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cip-bancos.org.br/ARQ/WSTIPOS.xsd" id="WSTIPOS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:annotation>
+        <xs:documentation>
+                    Definicao de tipos globais de WebService.
+                </xs:documentation>
+      </xs:annotation>
+      <xs:complexType name="CabecalhoReqComplexType">
+        <xs:sequence>
+          <xs:element name="NumCtrlEmis" type="ControleIFWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ISPBEmissor" type="CNPJBaseWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ISPBDestinatario" type="CNPJBaseWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DtHrEmis" type="DataHoraWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DtRef" type="DataWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DomSist" type="DomSist" />
+          <xs:element name="NUOp" type="NUOp" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CabecalhoRespComplexType">
+        <xs:sequence>
+          <xs:element name="DtHrResposta" type="DataHoraWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="StatusProcessamento" type="StatusWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Descricao" type="DescricaoWS">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="CNPJBaseWS">
+        <xs:annotation>
+          <xs:documentation>
+                        Primeiras 8 posicoes do CNPJ.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8" />
+          <xs:maxLength value="8" />
+          <xs:pattern value="\d{8}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ControleIFWS">
+        <xs:annotation>
+          <xs:documentation>
+                        Numero de Controle utilizado para controlar arquivo e registros do arquivo
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="20" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DataWS">
+        <xs:annotation>
+          <xs:documentation>
+                        Data no formato AAAA-MM-DD. Onde
+                        AAAA = ano,
+                        MM = mes
+                        [01-12],
+                        DD = dia [01-31].
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date" />
+      </xs:simpleType>
+      <xs:simpleType name="DataHoraWS">
+        <xs:annotation>
+          <xs:documentation>
+                        Data e hora no formato AAAA-MM-DDThh:mm:ss. Onde
+                        AAAA = ano,
+                        MM = mes [01-12],
+                        DD = dia [01-31],
+                        hh = horas [00-23],
+                        mm = minutos [00-59],
+                        ss = segundos [00-59].
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime" />
+      </xs:simpleType>
+      <xs:simpleType name="DomSist">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="5" />
+          <xs:maxLength value="5" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NUOp">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="23" />
+          <xs:maxLength value="23" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatusWS">
+        <xs:annotation>
+          <xs:documentation>
+                        Status de Processamento da Requisicao
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="DescricaoWS">
+        <xs:annotation>
+          <xs:documentation>
+                        Descricao do Processamento da Requisicao
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema xmlns="http://www.cip-bancos.org.br/ARQ/ASCC007.xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cip-bancos.org.br/ARQ/ASCC007.xsd" id="ASCC007" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ASCCDOCComplexType">
+        <xs:sequence>
+          <xs:element name="BCARQ" type="BCARQComplexType" />
+          <xs:element name="SISARQ" type="SISARQComplexType" />
+          <xs:element minOccurs="0" name="ESTARQ" type="ESTARQSimpleType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ASCCDOC" type="ASCCDOCComplexType">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+      </xs:element>
+      <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+          <xs:element name="ASCC007" type="ASCC007ComplexType">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ASCC007RET" type="ASCC007RETComplexType">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:complexType name="ASCC007ComplexType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="Grupo_ASCC007_Desavebc" type="Grupo_ASCC007_DesavebcComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007_DesavebcComplexType">
+        <xs:sequence>
+          <xs:element name="IdentdPartAdmdo" type="CNPJBase_CodErro">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="NumCtrlConsigrio" type="ControleIF_CodErro">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CNPJBaseEnte" type="CNPJBase_CodErro">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="NumConsigrioEnte" type="NumConsigrioEnte_CodErro">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="NumDigtConsigrioEnte" type="NumDigtConsigrioEnte_CodErro">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Grupo_ASCC007_DesavebcContrto" type="Grupo_ASCC007_DesavebcContrtoComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007_DesavebcContrtoComplexType">
+        <xs:sequence>
+          <xs:element name="NUAvebcSCC" type="NU_CodErro" />
+          <xs:element name="IdentcMotvDesavebcContrto" type="IdentcMotvDesavebcContrto_CodErro" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Grupo_ASCC007_ParclContrtoSCC" type="Grupo_ASCC007_ParclContrtoSCCComplexType" />
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional" />
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007_ParclContrtoSCCComplexType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NumParcl" type="NumParcl_CodErro" />
+          <xs:element minOccurs="0" name="VencParcl" type="MesAno_CodErro" />
+        </xs:sequence>
+        <xs:attribute name="CodErro" type="CodErro" use="optional" />
+      </xs:complexType>
+      <xs:complexType name="ASCC007RETComplexType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Grupo_ASCC007RET_DesavebcActo" type="Grupo_ASCC007RET_DesavebcActoComplexType" />
+          <xs:element minOccurs="0" name="Grupo_ASCC007RET_DesavebcRecsdo" type="Grupo_ASCC007RET_DesavebcRecsdoComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007RET_DesavebcActoComplexType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="Grupo_ASCC007RET_Desavebc" type="Grupo_ASCC007RET_DesavebcComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007RET_DesavebcComplexType">
+        <xs:sequence>
+          <xs:element name="IdentdPartAdmdo" type="CNPJBase" />
+          <xs:element name="NumCtrlConsigrio" type="ControleIF" />
+          <xs:element name="CNPJBaseEnte" type="CNPJBase" />
+          <xs:element name="NumConsigrioEnte" type="NumConsigrioEnte" />
+          <xs:element minOccurs="0" name="NumDigtConsigrioEnte" type="NumDigtConsigrioEnte" />
+          <xs:element name="Grupo_ASCC007RET_DesavebcContrto" type="Grupo_ASCC007RET_DesavebcContrtoComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007RET_DesavebcContrtoComplexType">
+        <xs:sequence>
+          <xs:element name="NUAvebcSCC" type="NU" />
+          <xs:element name="NumCtrlCIP" type="ControleIF" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Grupo_ASCC007RET_ParclContrtoSCC" type="Grupo_ASCC007RET_ParclContrtoSCCComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007RET_ParclContrtoSCCComplexType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NumParcl" type="NumParcl" />
+          <xs:element minOccurs="0" name="VencParcl" type="MesAno" />
+          <xs:element minOccurs="0" name="NumParclNaoDesavebd" type="NumParcl" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_ASCC007RET_DesavebcRecsdoComplexType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="Grupo_ASCC007_Desavebc" type="Grupo_ASCC007_DesavebcComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ASCCDOCPROComplexType">
+        <xs:sequence>
+          <xs:element name="BCARQ" type="BCARQComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ASCCDOCERRComplexType">
+        <xs:sequence>
+          <xs:element name="BCARQ" type="BCARQERRComplexType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BCARQComplexType">
+        <xs:sequence>
+          <xs:element name="NomArq" type="NomArq">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="NumCtrlEmis" type="ControleIF">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="NumCtrlDestOr" type="ControleIF">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ISPBEmissor" type="CNPJBase">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ISPBDestinatario" type="CNPJBase">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DtHrArq" type="DataHora">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SitReq" type="SitCons">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Grupo_Seq" type="Grupo_SeqComplexType">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DtRef" type="Data">
+            <xs:annotation>
+              <xs:documentation />
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Grupo_SeqComplexType">
+        <xs:sequence>
+          <xs:element name="NumSeq" type="NumSeq">
+            <xs:annotation>
+              <xs:documentation>
+                                Numero Sequencia
+                            </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="IndrCont" type="Indr">
+            <xs:annotation>
+              <xs:documentation>
+                                Indicador Continuidade
+                            </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BCARQERRComplexType">
+        <xs:sequence>
+          <xs:element name="NomArq" type="NomArqCodErr_ComplexType">
+            <xs:annotation>
+              <xs:documentation>
+                                Nome do Arquivo
+                            </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="ESTARQSimpleType">
+        <xs:annotation>
+          <xs:documentation>
+                        Copia do conteudo das informacoes de estimulo,
+                        quando houverem.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="512000" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CNPJBase">
+        <xs:annotation>
+          <xs:documentation>
+                        Primeiras 8 posicoes do CNPJ.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8" />
+          <xs:maxLength value="8" />
+          <xs:pattern value="\d{8}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CNPJ">
+        <xs:annotation>
+          <xs:documentation>
+                        Numero de Identificacao de Pessoa Juridica.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="14" />
+          <xs:maxLength value="14" />
+          <xs:pattern value="\d{14}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CPF">
+        <xs:annotation>
+          <xs:documentation>
+                        Numero de Identificacao de Pessoa Fisica.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="11" />
+          <xs:maxLength value="11" />
+          <xs:pattern value="\d{11}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CodCliOrgaoPagdr">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="2" />
+          <xs:maxLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ControleIF">
+        <xs:annotation>
+          <xs:documentation>
+                        Numero de Controle utilizado para controlar arquivo e registros do arquivo
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="20" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Data">
+        <xs:annotation>
+          <xs:documentation>
+                        Data no formato AAAA-MM-DD. Onde
+                        AAAA = ano,
+                        MM = mes
+                        [01-12],
+                        DD = dia [01-31].
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date" />
+      </xs:simpleType>
+      <xs:simpleType name="DataHora">
+        <xs:annotation>
+          <xs:documentation>
+                        Data e hora no formato AAAA-MM-DDThh:mm:ss. Onde
+                        AAAA = ano,
+                        MM = mes [01-12],
+                        DD = dia [01-31],
+                        hh = horas [00-23],
+                        mm = minutos [00-59],
+                        ss = segundos [00-59].
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime" />
+      </xs:simpleType>
+      <xs:simpleType name="Dia">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="1" />
+          <xs:maxInclusive value="31" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Email">
+        <xs:annotation>
+          <xs:documentation>
+                        Email
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="5" />
+          <xs:maxLength value="40" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Endereco">
+        <xs:annotation>
+          <xs:documentation>
+                        Endereço
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="5" />
+          <xs:maxLength value="300" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcEsp">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="9999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcMotvAlt">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="1" />
+          <xs:maxInclusive value="999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcOrgao">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="999999999999999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcServdr">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="999999999999999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcMotvConsignc">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcMotvDesavebcContrto">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="IdentcMotvTransf">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Indr">
+        <xs:annotation>
+          <xs:documentation>
+                        Indicador 'Sim' ou 'Nao'
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Mes">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="1" />
+          <xs:maxInclusive value="12" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="MesAno">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="6" />
+          <xs:maxLength value="6" />
+          <xs:pattern value="\d{6}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NomArq">
+        <xs:annotation>
+          <xs:documentation>
+                        Nome do arquivo
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="35" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Nome">
+        <xs:annotation>
+          <xs:documentation>
+                        Nome
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="150" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumSeq">
+        <xs:annotation>
+          <xs:documentation>
+                        Numero sequencial que indica a ordem dos arquivos
+                        particionados.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:totalDigits value="9" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumSimulc">
+        <xs:annotation>
+          <xs:documentation>
+                        Número único de identificação da simulação
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="35" />
+          <xs:maxLength value="35" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NU">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="21" />
+          <xs:maxLength value="21" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumConsigrioEnte">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="6" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumContrtoIF">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="20" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumDigtConsigrioEnte">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumOpConsigncConsigrio">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8" />
+          <xs:maxLength value="8" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumParcl">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="99" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumProvmnt">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="99" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="NumTel">
+        <xs:annotation>
+          <xs:documentation>
+                        Número do telefone
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="20" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="OtrEncargoContrto">
+        <xs:annotation>
+          <xs:documentation>
+                        Outros Encargos do Contrato.
+                        Ate quinze inteiros e dois decimais e sinalizados.
+                        Para valores menores que zero, o valor sera precedido pelo sinal "-".
+                        Exemplo: para 20 negativo informe -20 .
+                        Deve ser informado o ponto separador caso tenha decimais.
+                        Exemplo: para R$100,00 Informe 100; para R$100,10 informe 100.1;
+                        para R$100,11 informe 100.11; para R$100,11 negativo informe -100.11.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15" />
+          <xs:fractionDigits value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PrirdDeb">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="1" />
+          <xs:maxInclusive value="9999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PrzTax">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="1" />
+          <xs:maxInclusive value="99" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Qtd">
+        <xs:annotation>
+          <xs:documentation>
+                        Quantidade numerica inteira.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:totalDigits value="3" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="RG">
+        <xs:annotation>
+          <xs:documentation>
+                        Numero do RG para identificacao da pessoa fisica
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="20" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="RGDigito">
+        <xs:annotation>
+          <xs:documentation>
+                        Digito do numero do RG do servidor.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="UF">
+        <xs:annotation>
+          <xs:documentation>
+                        Sigla do Estado.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="2" />
+          <xs:maxLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="SitAvebc">
+        <xs:annotation>
+          <xs:documentation>
+                        Situacao da Averbação
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="2" />
+          <xs:maxLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="SitCadServdr">
+        <xs:annotation>
+          <xs:documentation>
+                        Situacao do cadastro do servidor no orgao pagador.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="SitMarg">
+        <xs:annotation>
+          <xs:documentation>
+                        Situacao da Margem
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="4" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="SitCons">
+        <xs:annotation>
+          <xs:documentation>
+                        Situacao da Requisicao
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:totalDigits value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Taxa">
+        <xs:annotation>
+          <xs:documentation>
+                        Taxa de emprestimo. Ate dois inteiros e cinco decimais.
+                        Nao podera ser informados taxa menor que zero.
+                        Deve ser informado o ponto separador caso tenha decimais.
+                        Exemplo: para R$10,00000 Informe 100; para R$10,10 informe 10.10000;
+                        para R$10,11 informe 100.11000
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="7" />
+          <xs:fractionDigits value="5" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="TpTax">
+        <xs:annotation>
+          <xs:documentation>
+                        Tipo da taxa utilizada para o cálculo das simulações.
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="99999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="TpParcmnt">
+        <xs:annotation>
+          <xs:documentation>
+                        Tipo de parcelamento da consignacao
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1" />
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="TpVincServdrOrgao">
+        <xs:annotation>
+          <xs:documentation>
+                        Tipo de Vínculo do servidor com o orgao pagador
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+          <xs:minInclusive value="0" />
+          <xs:maxInclusive value="99999" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Valor">
+        <xs:annotation>
+          <xs:documentation>
+                        Valor. Ate dezessete inteiros e dois decimais e
+                        sinalizado.
+                        Para valores menores que zero, o valor sera precedido
+                        pelo sinal '-'.
+                        Exemplo: para 20 negativo informe -20 .
+                        Deve ser
+                        informado o ponto separador caso tenha decimais.
+                        Exemplo: para
+                        R$100,00 informe 100; para R$100,10 informe 100.1;
+                        para R$100,11
+                        informe 100.11; para R$100,11 negativo informe -100.11
+                    </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15" />
+          <xs:fractionDigits value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="CNPJBase_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="CNPJBase">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="CNPJ_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="CNPJ">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="CPF_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="CPF">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="CodCliOrgaoPagdr_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="CodCliOrgaoPagdr">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="ControleIF_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="ControleIF">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Data_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Data">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="DataHora_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="DataHora">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Dia_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Dia">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Email_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Email">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Endereco_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Endereco">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcEsp_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcEsp">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcMotvAlt_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcMotvAlt">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcOrgao_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcOrgao">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcServdr_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcServdr">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcMotvConsignc_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcMotvConsignc">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcMotvDesavebcContrto_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcMotvDesavebcContrto">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="IdentcMotvTransf_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="IdentcMotvTransf">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Indr_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Indr">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Mes_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Mes">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="MesAno_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="MesAno">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Nome_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Nome">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumSimulc_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumSimulc">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NU_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NU">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumConsigrioEnte_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumConsigrioEnte">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumContrtoIF_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumContrtoIF">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumDigtConsigrioEnte_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumDigtConsigrioEnte">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumOpConsigncConsigrio_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumOpConsigncConsigrio">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumParcl_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumParcl">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NumProvmnt_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="NumProvmnt">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="OtrEncargoContrto_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="OtrEncargoContrto">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="PrirdDeb_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="PrirdDeb">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="PrzTax_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="PrzTax">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Qtd_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Qtd">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="RG_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="RG">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="RGDigito_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="RGDigito">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="UF_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="UF">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="SitAvebc_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="SitAvebc">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="SitCadServdr_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="SitCadServdr">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="SitMarg_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="SitMarg">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Taxa_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Taxa">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="TpTax_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="TpTax">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="TpParcmnt_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="TpParcmnt">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="TpVincServdrOrgao_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="TpVincServdrOrgao">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="NomArqCodErr_ComplexType">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="CodErro" type="CodErro" use="required" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Valor_CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:simpleContent>
+          <xs:extension base="Valor">
+            <xs:attribute name="CodErro" type="CodErro" use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:simpleType name="CodErro">
+        <xs:annotation>
+          <xs:documentation />
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8" />
+          <xs:maxLength value="8" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="WSCC007Request">
+    <wsdl:part name="WSCC007Request" element="tns:WSCC007Request" />
+  </wsdl:message>
+  <wsdl:message name="WSCC007Response">
+    <wsdl:part name="WSCC007Response" element="tns:WSCC007Response" />
+  </wsdl:message>
+  <wsdl:portType name="WSCC007">
+    <wsdl:operation name="WSCC007">
+      <wsdl:input name="WSCC007Request" message="tns:WSCC007Request" />
+      <wsdl:output name="WSCC007Response" message="tns:WSCC007Response" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCC007Soap11" type="tns:WSCC007">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WSCC007">
+      <soap:operation soapAction="" />
+      <wsdl:input name="WSCC007Request">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WSCC007Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCC007Service">
+    <wsdl:port name="WSCC007Soap11" binding="tns:WSCC007Soap11">
+      <soap:address location="https://www.hext.portaldoconsignado.org.br:443/ws/ASCC007/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
